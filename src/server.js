@@ -3,6 +3,7 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 import initializeDb from './database/dbinit';
+import userRoute from './routes/users/userRoute';
 
 const app = express();
 app.use(cors());
@@ -16,6 +17,10 @@ if (process.env.NODE_ENV !== 'test') {
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// routes
+app.use('/api/v1/auth', userRoute);
+
+// start server
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

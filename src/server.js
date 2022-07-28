@@ -4,6 +4,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import initializeDb from './database/dbinit';
 import userRoute from './routes/users/userRoute';
+import articleRoute from './routes/articles/articleRoute';
 
 const app = express();
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // routes
 app.use('/api/v1/auth', userRoute);
+app.use('/api/v1/articles', articleRoute);
 
 // start server
 const PORT = process.env.PORT || 5000;

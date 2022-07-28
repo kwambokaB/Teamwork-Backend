@@ -21,21 +21,24 @@ if (process.env.NODE_ENV === 'production') {
 const secretKey = process.env.JWT_PRIVATE_KEY;
 
 exports.verifyToken = async (req, res, next) => {
-  const token = req.headers.authorization.split('')[1];
+  const token = req.headers.authorization.split(' ')[1];
   if (!token) {
-    res.status(401).send('Unauthorised');
+    return res.status(400).json({
+      status: 'error',
+      error: 'User is not Authenticated',
+    });
   }
   try {
     const verified = await jwt.verify(token, secretKey);
     req.user = verified;
-    console.log('req.user');
+    // console.log('req.user');
+    return next();
   } catch (err) {
     res.status(400).json({
       status: 'error',
       message: 'invalid token',
     });
   }
-  return next();
 };
 
 exports.verifyCreateUserToken = async (req, res, next) => {

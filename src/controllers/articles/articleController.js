@@ -9,7 +9,7 @@ dotenv.config();
 let pool;
 if (process.env.NODE_ENV === 'production') {
   // On production server using heroku db connection string
-  pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  pool = new Pool({ connectionString: process.env.DATABASE_URL }); 
 } else if (process.env.NODE_ENV === 'test') {
   pool = new Pool({ connectionString: process.env.TEST_DATABASE_URL });
 } else {

@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // routes
-app.use('/api/v1', (req, res) => {
+app.use('/', (req, res) => {
   res.status(200).send('Welcome to this awesome api!!');
 });
 app.use('/api/v1/auth', userRoute);
